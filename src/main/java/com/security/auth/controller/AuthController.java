@@ -58,4 +58,9 @@ public class AuthController {
         model.addAttribute("users", userDtos);
         return "users";
     }
+
+    @GetMapping("/login")
+    public String loginUser(){
+        return "/login";
+    }
 }
