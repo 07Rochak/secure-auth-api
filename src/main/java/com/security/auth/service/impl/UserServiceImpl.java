@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -38,10 +40,31 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
+    @Override
+    public List<UserDto> findAllUsers() {
+        List<User> users= userRepository.findAll();
+        List<UserDto> userDtos = users.stream()
+                .map((user)->mapUserToUserDto(user))
+                .collect(Collectors.toList());
+        return userDtos;
+    }
+
     public Role roleCheckExist()
     {
         Role role = new Role();
         role.setName("ROLE_ADMIN");
         return roleRepository.save(role);
+    }
+
+    public UserDto mapUserToUserDto(User user){
+        String[] name = user.getName().split(" ");
+        String firstName = name[0];
+        String lastName = name[1];
+        UserDto userDto = new UserDto(user.getId(),
+                firstName,
+                lastName,
+                user.getEmail(),
+                user.getPassword());
+        return userDto;
     }
 }
