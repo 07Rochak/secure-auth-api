@@ -50,6 +50,8 @@ xmlns:th="http://www.thymeleaf.org/"
                         th:field="*{firstName}"
                         type="text"
                     />
+                    <p th:errors="*{firstName}" class="text-danger"
+                    th:if="${#fields.hasErrors('firstName')}"></p>
                 </div>
                 <div class = "form-group-mb-3">
                     <label class="form-label">Last Name</label>
@@ -61,6 +63,8 @@ xmlns:th="http://www.thymeleaf.org/"
                             th:field="*{lastName}"
                             type="text"
                     />
+                    <p th:errors="*{lastName}" class="text-danger"
+                       th:if="${#fields.hasErrors('lastName')}"></p>
                 </div>
                 <div class = "form-group-mb-3">
                     <label class="form-label">Email</label>
@@ -72,6 +76,8 @@ xmlns:th="http://www.thymeleaf.org/"
                             th:field="*{email}"
                             type="email"
                     />
+                    <p th:errors="*{email}" class="text-danger"
+                       th:if="${#fields.hasErrors('email')}"></p>
                 </div>
                 <div class = "form-group-mb-3">
                     <label class="form-label">Password</label>
@@ -83,6 +89,8 @@ xmlns:th="http://www.thymeleaf.org/"
                             th:field="*{password}"
                             type="password"
                     />
+                    <p th:errors="*{password}" class="text-danger"
+                       th:if="${#fields.hasErrors('password')}"></p>
                 </div>
                     <br />
                     <div class="form-group">
