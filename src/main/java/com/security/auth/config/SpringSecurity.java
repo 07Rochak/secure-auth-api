@@ -26,7 +26,11 @@ public class SpringSecurity {
                 .authorizeHttpRequests(
                         auth -> auth
                                 // Require authentication for ANY incoming request
-                                .anyRequest().authenticated()
+//                                .anyRequest().authenticated()
+                                // allow all users(including unauthenticated) to access the pages with urls
+                                .requestMatchers("/register/**").permitAll()
+                                .requestMatchers("/index").permitAll()
+                                .requestMatchers("/users").hasRole("ADMIN") // only for admin user
                 )
 
                 // Configure form-based login
