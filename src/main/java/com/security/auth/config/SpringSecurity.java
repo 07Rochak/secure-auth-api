@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AndRequestMatcher;
+import org.springframework.util.AntPathMatcher;
 
 @Configuration
 // Tells Spring that this class contains configuration definitions
@@ -44,6 +46,11 @@ public class SpringSecurity {
 
                                 // Allow everyone (even unauthenticated users)
                                 // to access the login page
+                                .permitAll()
+                ).logout(
+                        logout -> logout
+                                .logoutUrl("/logout")        // URL to trigger logout
+                                .logoutSuccessUrl("/login")  // Redirect after logout
                                 .permitAll()
                 );
 
